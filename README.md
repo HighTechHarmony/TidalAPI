@@ -1,3 +1,5 @@
+PROJECT IS NOT UNDER ACTIVE DEVELOPMENT
+
 # TidalAPI-TS
 
 [![Build Status](https://www.travis-ci.com/max-huster/TidalAPI.svg?branch=master)](https://www.travis-ci.com/github/max-huster/TidalAPI)
