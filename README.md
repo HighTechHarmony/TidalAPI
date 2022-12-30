@@ -124,4 +124,5 @@ Your TIDAL token is likely incorrect.
 ## Testing
 
 ~~If you want to run the Unit-Tests you need to specify your Tidal Login Credentials in the ENV parameters like so:~~
+
 Yea well no. Tests are probably broken. I mean they have to be broken since there is no more login stuff. Didn't care about fixing them.
