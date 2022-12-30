@@ -30,6 +30,7 @@ yarn add https://github.com/ShuriZma/TidalAPI
  - In Fiddler, click **Tools** > **Options** > **Decrypt HTTPS Traffic**
  - Install TIDAL for Windows and start it
  - In Fiddler, look for requests to `api.tidal.com`. Click a request, then on the right, click **Inspectors** > **Headers**. Underneath **Miscellaneous** you'll see `X-Tidal-Token`. This is a TIDAL Token you can use. 
+ 
  EDIT: This pretty much still works. Now its just not `X-Tidal-Token` anymore but a Bearer auth key
 
 <img src="https://i.imgur.com/SvBgcIV.png">
