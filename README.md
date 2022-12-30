@@ -24,14 +24,14 @@ or if you are using yarn instead of npm:
 yarn add https://github.com/ShuriZma/TidalAPI
 ```
 
-Obtain the Tidal token needed to use this API
-As well as a TIDAL username and password, the Tidal API needs an API token which is unique to your apps. You can get this token by network-sniffing some application that uses TIDAL Playback feature, like Tidal for Windows, Tidal for Android, or CapTune from Sennheiser.
+### Obtaining a token from TIDAL for Windows
 
-Obtaining a token from TIDAL for Windows
-Install Fiddler and start it.
-In Fiddler, click Tools > Options > Decrypt HTTPS Traffic
-Install TIDAL for Windows and start it
-In Fiddler, look for requests to api.tidal.com. Click a request, then on the right, click Inspectors > Headers. Underneath Miscellaneous you'll see X-Tidal-Token. This is a TIDAL Token you can use.
+ - Install [Fiddler](https://www.telerik.com/download/fiddler) and start it.
+ - In Fiddler, click **Tools** > **Options** > **Decrypt HTTPS Traffic**
+ - Install TIDAL for Windows and start it
+ - In Fiddler, look for requests to `api.tidal.com`. Click a request, then on the right, click **Inspectors** > **Headers**. Underneath **Miscellaneous** you'll see `X-Tidal-Token`. This is a TIDAL Token you can use.
+
+<img src="https://i.imgur.com/SvBgcIV.png">
 
 ## Usage
 
