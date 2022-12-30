@@ -104,15 +104,16 @@ console.log(artistVideos);
 ### Playlist
 ```javascript
 // get general information about the playlist
-const playlistInfo = await getPlaylist("7ab5d2b6-93fb-4181-a008-a1d18e2cebfa");
+const playlistInfo = await getPlaylist("7ab5d2b6-93fb-4181-a008-a1d18e2cebfa", "your-user-id");
 // get tracks of the playlist
-const playlistInfo = await getPlaylistTracks("7ab5d2b6-93fb-4181-a008-a1d18e2cebfa");
+const playlistInfo = await getPlaylistTracks("7ab5d2b6-93fb-4181-a008-a1d18e2cebfa", "your-user-id"); 
+// EDIT: since we cant login we also cant get the user id anymore so you will have to get it yourself. Might wanna check fiddle again
 ```
 
 #### Manipulation
 ```javascript
-const gguid = await createPlaylist("My Playlist", "Description");
-const gguid = await createPlaylistIfNotExists("MyPlaylist");
+const gguid = await createPlaylist("My Playlist", "Description", "your-user-id");
+const gguid = await createPlaylistIfNotExists("MyPlaylist", "your-user-id");
 ```
 
 
