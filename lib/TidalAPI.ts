@@ -19,13 +19,6 @@ const baseURL = 'https://api.tidalhifi.com/v1';
 
 export class TidalAPI {
     /**
-     * TIDAL API Session ID
-     * @type {null|String}
-     * @private
-     */
-    private _sessionId: string | null = null;
-
-    /**
      * authData
      * @type {Object}
      */
@@ -291,14 +284,13 @@ export class TidalAPI {
         if (!params)
             params = {};
         params.countryCode = params.countryCode ? params.countryCode : this.authData.countryCode;
-        params.sessionId = params.sessionId ?? this._sessionId;
 
         let headers = additionalHeaders;
         if (!headers) {
             headers = new Headers();
         }
         headers.append('Origin', 'https://desktop.tidal.com');
-        headers.append('X-Tidal-SessionId', this._sessionId);
+        headers.append('Authorization', 'Bearer ' + this.authData.token);
 
         let body: string | URLSearchParams;
 
