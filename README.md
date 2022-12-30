@@ -4,13 +4,6 @@ Donno if the playlist stuff also works, fetching track data, images etc definite
 
 # TidalAPI-TS
 
-~~[![Build Status](https://www.travis-ci.com/max-huster/TidalAPI.svg?branch=master)](https://www.travis-ci.com/github/max-huster/TidalAPI)
-[![npm version](https://img.shields.io/npm/v/tidalapi-ts.svg)](https://npmjs.org/package/tidalapi-ts)
-[![npm downloads](https://img.shields.io/npm/dm/tidalapi-ts.svg)](https://npmjs.org/package/tidalapi-ts)
-[![NPM](https://img.shields.io/npm/l/tidalapi-ts.svg)](https://github.com/max-huster/TidalAPI/blob/master/LICENSE)
-[![David](https://img.shields.io/david/max-huster/TidalAPI.svg)](https://david-dm.org/max-huster/TidalAPI)
-[![devDependencies Status](https://status.david-dm.org/gh/max-huster/TidalAPI.svg?type=dev)](https://david-dm.org/max-huster/TidalAPI?type=dev)~~
-
 ## About
 
 node.js TIDAL API built with TypeScript. This module is using the TIDAL Web API v1.
