@@ -1,5 +1,5 @@
 export interface LoginInfo {
-    username: string;
-    password: string;
+    token: string;
+    countryCode: string;
     quality: "LOSSLESS" | "HIGH" | "LOW";
 }

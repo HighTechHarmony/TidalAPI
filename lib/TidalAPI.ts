@@ -26,24 +26,10 @@ export class TidalAPI {
     private _sessionId: string | null = null;
 
     /**
-     * TIDAL API Country code
-     * @type {null|String}
-     * @private
-     */
-    private _countryCode: string | null = null;
-
-    /**
-     * TIDAL API User ID
-     * @type {null|String}
-     * @private
-     */
-    private _userId: string | null = null;
-
-    /**
      * authData
      * @type {Object}
      */
-    private authData: LoginInfo;
+    private readonly authData: LoginInfo;
 
     /**
      * Create TidalAPI instance
@@ -54,11 +40,11 @@ export class TidalAPI {
         if (typeof login !== 'object') {
             throw new Error('You must pass auth data into the TidalAPI object correctly');
         } else {
-            if (typeof login.username !== 'string') {
-                throw new Error('Username invalid or missing');
+            if (typeof login.token !== 'string') {
+                throw new Error('Token invalid or missing');
             }
-            if (typeof login.password !== 'string') {
-                throw new Error('Password invalid or missing');
+            if (typeof login.countryCode !== 'string') {
+                throw new Error('Country code invalid or missing');
             }
             if (typeof login.quality !== 'string') {
                 throw new Error('Stream quality invalid or missing');
@@ -72,49 +58,8 @@ export class TidalAPI {
     }
 
     /**
-     * api logged in
-     * @type {null|String}
-     */
-    private _loggedIn = false;
-
-    get loggedIn(): boolean {
-        return this._loggedIn;
-    }
-
-    /**
-     * Try login using credentials.
-     */
-    public async login(): Promise<void> {
-        const headers = new Headers();
-        headers.append('X-Tidal-Token', "wc8j_yBJd20zOmx0");
-        headers.append('Content-Type', "application/x-www-form-urlencoded");
-
-        const urlencoded = new URLSearchParams();
-        urlencoded.append("username", this.authData.username);
-        urlencoded.append("password", this.authData.password);
-
-
-        const result = await fetch(baseURL + "/login/username", {
-            method: 'POST',
-            headers: headers,
-            body: urlencoded,
-            redirect: 'follow'
-        });
-
-        const data: { sessionId: string, userId: string, countryCode: string } = await result.json();
-        this._sessionId = data.sessionId;
-        this._userId = data.userId;
-        this._countryCode = data.countryCode;
-        this._loggedIn = true;
-    }
-
-    public getMyId(): string {
-        return this._userId;
-    }
-
-    /**
      * Global search.
-     * @param
+     * @param query
      */
     public async search(query: SearchParams | string): Promise<TidalSearchResult> {
         let queryObj: SearchParams = {};
@@ -130,7 +75,6 @@ export class TidalAPI {
     /**
      * Get artist info.
      * @param artistId
-     * @param query
      */
     public async getArtist(artistId: string): Promise<TidalArtistInfoFull> {
         return await this._baseRequest('/artists/' + encodeURIComponent(artistId), null);
@@ -184,7 +128,6 @@ export class TidalAPI {
     /**
      * Get album info.
      * @param albumId
-     * @param query
      */
     public async getAlbum(albumId: string): Promise<TidalAlbum> {
         return await this._baseRequest('/albums/' + encodeURIComponent(albumId), null);
@@ -221,7 +164,6 @@ export class TidalAPI {
     /**
      * Get track info.
      * @param trackId
-     * @param callback
      */
     public async getTrackInfo(trackId: string): Promise<TidalTrack> {
         return await this._baseRequest('/tracks/' + encodeURIComponent(trackId), {});
@@ -252,21 +194,12 @@ export class TidalAPI {
     }
 
     /**
-     * Get user info.
-     * @param userId
-     */
-
-    public async getUser(userId: string = null) {
-        return await this._baseRequest('/users/' + encodeURIComponent(userId ?? this._userId), {});
-    }
-
-    /**
      * Get user playlists.
      * @param userId
      * @param query
      */
-    public async getPlaylists(userId: string = null, query: SearchParams = null): Promise<TidalArrayResult<any>> {
-        return await this._baseRequest('/users/' + encodeURIComponent(userId ?? this._userId) + "/playlists", query);
+    public async getPlaylists(userId: string, query: SearchParams = null): Promise<TidalArrayResult<any>> {
+        return await this._baseRequest('/users/' + encodeURIComponent(userId) + "/playlists", query);
     }
 
     public async getETag(playlistId) {
@@ -312,11 +245,12 @@ export class TidalAPI {
      * Creates a new playlist in the users library
      * @param title {string} Title of the playlist
      * @param description {string} Description of the playlist
+     * @param userId {string} UserId to create the playlist for
      * @returns {Promise<string>} UUID of the created playlist
      */
 
-    public async createPlaylist(title: string, description: string): Promise<string> {
-        const url = "/users/" + encodeURIComponent(this.getMyId()) + "/playlists" + "?countryCode=" + encodeURIComponent(this._countryCode);
+    public async createPlaylist(title: string, description: string, userId: string): Promise<string> {
+        const url = "/users/" + encodeURIComponent(userId) + "/playlists" + "?countryCode=" + encodeURIComponent(this.authData.countryCode);
         const params = {
             "title": title,
             "description": description
@@ -329,14 +263,15 @@ export class TidalAPI {
      * Creates a new playlist if no other with the given name was found
      * @param title {string} Title of the playlist
      * @param description {string} Description of the playlist
+     * @param userId {string} UserId to create the playlist for
      * @returns {Promise<string>} UUID of the playlist
      */
 
-    public async createPlaylistIfNotExists(title, description) {
+    public async createPlaylistIfNotExists(title, description, userId) {
         const exists = await this.checkIfPlaylistExists(title);
         if (exists)
             return exists;
-        return (await this.createPlaylist(title, description));
+        return (await this.createPlaylist(title, description, userId));
     }
 
     /**
@@ -353,21 +288,16 @@ export class TidalAPI {
     }
 
     private async _baseRequestRaw(url: string, params = null, method: string, additionalHeaders: Headers, paramsAsUrlEncoded, emptyResponse = false): Promise<RawResult> {
-        if (!this._loggedIn) {
-            await this.login();
-            return await this._baseRequestRaw(url, params, method, additionalHeaders, paramsAsUrlEncoded);
-        }
-
         if (!params)
             params = {};
-        params.countryCode = params.countryCode ? params.countryCode : this._countryCode;
+        params.countryCode = params.countryCode ? params.countryCode : this.authData.countryCode;
         params.sessionId = params.sessionId ?? this._sessionId;
 
         let headers = additionalHeaders;
         if (!headers) {
             headers = new Headers();
         }
-        headers.append('Origin', 'http://listen.tidal.com');
+        headers.append('Origin', 'https://desktop.tidal.com');
         headers.append('X-Tidal-SessionId', this._sessionId);
 
         let body: string | URLSearchParams;
