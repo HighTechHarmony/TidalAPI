@@ -90,7 +90,7 @@ console.log(videoStreamUrl);
 
 ```javascript
 
-const url = api.getArtUrlSync('24f52ab0-e7d6-414d-a650-20a4c686aa57', 1280);
+const url = api.getArtUrlSync('24f52ab0-e7d6-414d-a650-20a4c686aa57', 1280); // use 750 instead of 1280 for arist images :thumbsup:
 
 ```
 
