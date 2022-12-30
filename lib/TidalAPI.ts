@@ -289,7 +289,6 @@ export class TidalAPI {
         if (!headers) {
             headers = new Headers();
         }
-        headers.append('Origin', 'https://desktop.tidal.com');
         headers.append('Authorization', 'Bearer ' + this.authData.token);
 
         let body: string | URLSearchParams;
