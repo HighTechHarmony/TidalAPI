@@ -1,33 +1,35 @@
-PROJECT IS NOT UNDER ACTIVE DEVELOPMENT
+Eyo I fixed it for now. Since there is no more login, you have to use your own token from now on. 
+
+Donno if the playlist stuff also works, fetching track data, images etc definitely does tho.
 
 # TidalAPI-TS
 
-[![Build Status](https://www.travis-ci.com/max-huster/TidalAPI.svg?branch=master)](https://www.travis-ci.com/github/max-huster/TidalAPI)
+~~[![Build Status](https://www.travis-ci.com/max-huster/TidalAPI.svg?branch=master)](https://www.travis-ci.com/github/max-huster/TidalAPI)
 [![npm version](https://img.shields.io/npm/v/tidalapi-ts.svg)](https://npmjs.org/package/tidalapi-ts)
 [![npm downloads](https://img.shields.io/npm/dm/tidalapi-ts.svg)](https://npmjs.org/package/tidalapi-ts)
 [![NPM](https://img.shields.io/npm/l/tidalapi-ts.svg)](https://github.com/max-huster/TidalAPI/blob/master/LICENSE)
 [![David](https://img.shields.io/david/max-huster/TidalAPI.svg)](https://david-dm.org/max-huster/TidalAPI)
-[![devDependencies Status](https://status.david-dm.org/gh/max-huster/TidalAPI.svg?type=dev)](https://david-dm.org/max-huster/TidalAPI?type=dev)
+[![devDependencies Status](https://status.david-dm.org/gh/max-huster/TidalAPI.svg?type=dev)](https://david-dm.org/max-huster/TidalAPI?type=dev)~~
 
 ## About
 
 node.js TIDAL API built with TypeScript. This module is using the TIDAL Web API v1.
 
 
-Originally created by [Lucas Vasconcelos](https://github.com/lucaslg26)
+Originally created by [Lucas Vasconcelos](https://github.com/lucaslg26) and first forked by [max-huster](https://github.com/max-huster)
 
 **NOTE:** Currently not supporting facebook login.
 
 ## How to use
 Run the following:
-
+~~
 ```
 npm install tidalapi-ts
 ```
 or if you are using yarn instead of npm:
 ```
 yarn add tidalapi-ts
-```
+```~~
 ## Usage
 
 Simple usage searching and querying a track list
