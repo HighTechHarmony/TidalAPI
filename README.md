@@ -29,7 +29,8 @@ yarn add https://github.com/ShuriZma/TidalAPI
  - Install [Fiddler](https://www.telerik.com/download/fiddler) and start it.
  - In Fiddler, click **Tools** > **Options** > **Decrypt HTTPS Traffic**
  - Install TIDAL for Windows and start it
- - In Fiddler, look for requests to `api.tidal.com`. Click a request, then on the right, click **Inspectors** > **Headers**. Underneath **Miscellaneous** you'll see `X-Tidal-Token`. This is a TIDAL Token you can use.
+ - In Fiddler, look for requests to `api.tidal.com`. Click a request, then on the right, click **Inspectors** > **Headers**. Underneath **Miscellaneous** you'll see `X-Tidal-Token`. This is a TIDAL Token you can use. 
+ EDIT: This pretty much still works. Now its just not `X-Tidal-Token` anymore but a Bearer auth key
 
 <img src="https://i.imgur.com/SvBgcIV.png">
 
@@ -41,8 +42,8 @@ Simple usage searching and querying a track list
 import {TidalAPI} from "TidalAPI";
 
 var api = new TidalAPI({
-  username: 'your-username-here',
-  password: 'your-password-here',
+  token: 'your-token-here',
+  countryCode: 'your-country-code-here', // countryCode can be sth like 'US' if you don't know your country code just google it.
   // Could also be 'LOSSLESS' but this only supported on premium subscriptions
   quality: 'HIGH'
 });
