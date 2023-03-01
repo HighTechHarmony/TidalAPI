@@ -167,8 +167,12 @@ export class TidalAPI {
      * @param trackId
      */
     public async getStreamUrl(trackId: string): Promise<TidalStreamInfo> {
-        return await this._baseRequest('/tracks/' + encodeURIComponent(trackId) + '/streamUrl', {
-            soundQuality: this.authData.quality
+        return await this._baseRequest('/tracks/' + encodeURIComponent(trackId) + '/playbackinfopostpaywall', {
+            // soundQuality: this.authData.quality
+            audioquality: this.authData.quality,
+            playbackmode: 'STREAM',
+            assetpresentation: 'FULL',
+            countryCode: this.authData.countryCode
         });
     }
 
@@ -309,11 +313,21 @@ export class TidalAPI {
         // console.debug(baseURL + url);
 
         // execute http request
-        const result = await fetch(baseURL + url, {
-            method,
-            headers,
-            body: body
-        });
+        let result: any;
+
+        if (body === null) {
+            result = await fetch(baseURL + url, {
+                method,
+                headers                
+            });
+        }  else {
+            result = await fetch(baseURL + url, {
+                method,
+                headers,
+                body: JSON.stringify(body)
+            });
+        }
+
         let data: any;
         if (!emptyResponse) {
             data = await result.json();

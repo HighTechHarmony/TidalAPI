@@ -2,9 +2,9 @@ import {TidalAPI} from "../lib/TidalAPI";
 // note if your are using it in your project, you probalby want to change it to:
 // import {TidalAPI} from "TidalAPI";
 const api = new TidalAPI({
-    username: '',
-    password: '',
-    quality: 'LOSSLESS' // also HIGH is possible
+    quality: 'HIGH', // also LOSSLESS is possible
+    countryCode: '',
+    token: ''        
 });
 
 // async wrapper method

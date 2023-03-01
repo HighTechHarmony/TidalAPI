@@ -1,27 +1,27 @@
-Eyo I fixed it for now. Since there is no more login, you have to use your own token from now on. 
-
-Donno if the playlist stuff also works, fetching track data, images etc definitely does tho.
-
 # TidalAPI-TS
 
 ## About
 
 node.js TIDAL API built with TypeScript. This module is using the TIDAL Web API v1.
 
+Fix
 
-Originally created by [Lucas Vasconcelos](https://github.com/lucaslg26) and first forked by [max-huster](https://github.com/max-huster)
+Originally created by [Lucas Vasconcelos](https://github.com/lucaslg26) 
+Adapted to TypeScript by [max-huster](https://github.com/max-huster)
+Token/authorization method fixed by [ShuriZma](https://github.com/ShuriZma)
 
 **NOTE:** Currently not supporting facebook login.
+
 
 ## How to use
 Run the following:
 ~~
 ```
-npm install https://github.com/ShuriZma/TidalAPI
+npm install https://github.com/HighTechHarmony/TidalAPI
 ```
 or if you are using yarn instead of npm:
 ```
-yarn add https://github.com/ShuriZma/TidalAPI
+yarn add https://github.com/HighTechHarmony/TidalAPI
 ```
 
 ### Obtaining a token from TIDAL for Windows
@@ -29,11 +29,11 @@ yarn add https://github.com/ShuriZma/TidalAPI
  - Install [Fiddler](https://www.telerik.com/download/fiddler) and start it.
  - In Fiddler, click **Tools** > **Options** > **Decrypt HTTPS Traffic**
  - Install TIDAL for Windows and start it
- - In Fiddler, look for requests to `api.tidal.com`. Click a request, then on the right, click **Inspectors** > **Headers**. Underneath **Miscellaneous** you'll see `X-Tidal-Token`. This is a TIDAL Token you can use. 
+ - In Fiddler, look for requests to `desktop.tidal.com`. Click a request, then on the right, click **Inspectors** > **Headers**. Underneath **Security** you'll see `authorization: Bearer ` followed by a really long string of alphanumeric characters. This is a TIDAL Token you can use. 
  
- EDIT: This pretty much still works. Now its just not `X-Tidal-Token` anymore but a Bearer auth key
+ 
 
-<img src="https://i.imgur.com/SvBgcIV.png">
+<img src="https://imgur.com/ol9QZ39">
 
 ## Usage
 
@@ -125,6 +125,4 @@ Your TIDAL token is likely incorrect.
 
 ## Testing
 
-~~If you want to run the Unit-Tests you need to specify your Tidal Login Credentials in the ENV parameters like so:~~
-
-Yea well no. Tests are probably broken. I mean they have to be broken since there is no more login stuff. Didn't care about fixing them.
+Testing is not currently implemented 
